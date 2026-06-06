@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  anet-validator:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: anet-validator
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    env_file:
+      - ../.env
+    environment:
+      ANET_ENV: production
+      ANET_CHAIN_ID: anet-mainnet
+      ANET_BLOCK_TIME_SECONDS: 2
+      ANET_WEB2_SYNC_SECONDS: 0
+      ANET_SEED_NODES: https://node1.a-network.net,https://node2.community.org,https://node3.validator.net
+      ANET_PUBLIC_RPC_ENDPOINTS: https://node1.a-network.net,https://node2.community.org
+      PORT: 8080
+    command: ["/bin/sh", "-lc", "./anet-private-mainnet --start-node --bootstrap"]
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    volumes:
+      - anet_data:/opt/anet/data
+      - ../config:/opt/anet/config:ro
+
+volumes:
+  anet_data:

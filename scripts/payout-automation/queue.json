@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "request_id": "live-genesis-test-001",
+      "user_wallet": "ANETE53B24FD164529753D5B2CEA1251D616C923",
+      "destination_bsc_address": "0x9C7C1058fdc9b710f688ECb7562924D9AE771417",
+      "usdc_amount": 0.5,
+      "swap_reference": "swap-live-genesis-test-001",
+      "status": "paid",
+      "retries": 0,
+      "created_at": "2026-05-10T23:33:56.9708967Z",
+      "last_error": "wallet not eligible yet",
+      "updated_at": "2026-05-10T23:35:15.7235853Z",
+      "payout_tx_hash": "0x0b445c4070cf28f3824b3e04fa3fd3995022c66f774de1a22fc73cb95907d3b2",
+      "paid_at": "2026-05-10T23:35:15.7235853Z",
+      "chain_activity_error": ""
+    }
+  ]
+}

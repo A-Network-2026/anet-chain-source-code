@@ -1,0 +1,13 @@
+{
+  "processed_request_ids": [
+    "live-genesis-test-001"
+  ],
+  "processed_swap_references": [
+    "swap-live-genesis-test-001"
+  ],
+  "hourly_window_start": "2026-05-10T23:21:52.1809758Z",
+  "hourly_paid_total_usdc": 0.5,
+  "user_daily_paid_usdc": {
+    "2026-05-10|ANETE53B24FD164529753D5B2CEA1251D616C923": 0.5
+  }
+}

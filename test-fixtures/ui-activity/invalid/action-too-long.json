@@ -1,0 +1,4 @@
+{
+  "source": "web",
+  "action": "this_is_a_really_long_action_name_that_exceeds_the_maximum_allowed_length_of_64_characters_limit"
+}

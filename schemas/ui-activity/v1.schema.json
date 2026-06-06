@@ -1,0 +1,174 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://a-network.net/schemas/ui-activity/v1.schema.json",
+  "title": "ANET UI Activity Request v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "source",
+    "action"
+  ],
+  "properties": {
+    "source": {
+      "type": "string",
+      "enum": [
+        "web",
+        "inapp"
+      ]
+    },
+    "action": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-z0-9_]+$"
+    },
+    "wallet": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "screen": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "status": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "client_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "detail": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        {
+          "type": "object",
+          "additionalProperties": true
+        }
+      ]
+    },
+    "auth": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "wallet",
+        "nonce",
+        "timestamp",
+        "chain_id",
+        "payload",
+        "signature",
+        "action_hash"
+      ],
+      "properties": {
+        "wallet": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "nonce": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "timestamp": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$"
+        },
+        "chain_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "payload": {
+          "type": "object"
+        },
+        "signature": {
+          "type": "string",
+          "minLength": 1
+        },
+        "action_hash": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "SignedActionAuthorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "payload",
+        "signature"
+      ],
+      "properties": {
+        "payload": {
+          "type": "string",
+          "minLength": 1
+        },
+        "signature": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^0x[0-9a-fA-F]+$"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "wallet"
+        ]
+      },
+      "then": {
+        "anyOf": [
+          {
+            "required": [
+              "auth"
+            ]
+          },
+          {
+            "description": "Wallet activity is also accepted with a matching authenticated explorer session cookie for web clients."
+          }
+        ]
+      }
+    }
+  ],
+  "examples": [
+    {
+      "source": "web",
+      "action": "swap_form_submit",
+      "wallet": "ANET1234567890ABCDEF1234567890ABCDEF1234",
+      "screen": "dex_swap",
+      "status": "success",
+      "client_version": "web-2026.05.10",
+      "detail": "amount_in=10000000;pair=ANET_USDT"
+    },
+    {
+      "source": "inapp",
+      "action": "tx_submit",
+      "wallet": "ANET1234567890ABCDEF1234567890ABCDEF1234",
+      "screen": "transfer",
+      "status": "pending",
+      "client_version": "ios-1.0.17",
+      "detail": "kind=transfer",
+      "auth": {
+        "wallet": "ANET1234567890ABCDEF1234567890ABCDEF1234",
+        "nonce": 27,
+        "timestamp": "2026-05-10T09:30:00Z",
+        "chain_id": "anet-mainnet",
+        "payload": {
+          "route": "app_activity"
+        },
+        "signature": "<65-byte-recoverable-signature-hex>",
+        "action_hash": "<sha256-canonical-action-hash-hex>"
+      }
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+services:
+  - type: web
+    name: anet-private-mainnet
+    env: rust
+    plan: starter
+    healthCheckPath: /health
+    buildCommand: cargo build --release
+    startCommand: ./target/release/anet-private-mainnet --bootstrap --start-node
+    disks:
+      - name: anet-data
+        mountPath: /var/data/anet
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: RUST_LOG
+        value: info
+      - key: PGSSLMODE
+        value: require
+      - key: ANET_EPOCH_SECONDS
+        value: 2
+      - key: ANET_WEB2_SYNC_SECONDS
+        value: 60
+      - key: ANET_EXPLORER_DASHBOARD_CACHE_MS
+        value: 5000
+      - key: ANET_EXPLORER_DASHBOARD_SOFT_TIMEOUT_MS
+        value: 1500
+      - key: ANET_EXPLORER_DASHBOARD_BACKOFF_MS
+        value: 10000
+      - key: ANET_EXPLORER_ROOM_BOT_GUARD
+        value: true
+      - key: ANET_EXPLORER_DETAIL_CACHE_MS
+        value: 10000
+      - key: ANET_EXPLORER_AUTH_REQUIRED
+        value: true
+      - key: ANET_ALLOW_INELIGIBLE_WALLET_TEST
+        value: false
+      - key: ANET_TEST_FAUCET_ENABLED
+        value: false
+      - key: ANET_GENESIS_PATH
+        value: /var/data/anet/config/genesis.json
+      - key: ANET_CHAIN_PATH
+        value: /var/data/anet/data/chain.json
+      - key: DATABASE_URL
+        sync: false
+      - key: ANET_SEED_NODES
+        sync: false
+      - key: ANET_PUBLIC_RPC_ENDPOINTS
+        sync: false
+
+  - type: web
+    name: anet-node2
+    env: rust
+    plan: starter
+    healthCheckPath: /health
+    buildCommand: cargo build --release
+    startCommand: ./target/release/anet-private-mainnet --bootstrap --start-node
+    disks:
+      - name: anet-node2-data
+        mountPath: /var/data/anet
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: RUST_LOG
+        value: info
+      - key: PGSSLMODE
+        value: require
+      - key: ANET_EPOCH_SECONDS
+        value: 2
+      - key: ANET_WEB2_SYNC_SECONDS
+        value: 60
+      - key: ANET_EXPLORER_DASHBOARD_CACHE_MS
+        value: 5000
+      - key: ANET_EXPLORER_DASHBOARD_SOFT_TIMEOUT_MS
+        value: 1500
+      - key: ANET_EXPLORER_DASHBOARD_BACKOFF_MS
+        value: 10000
+      - key: ANET_EXPLORER_ROOM_BOT_GUARD
+        value: true
+      - key: ANET_EXPLORER_DETAIL_CACHE_MS
+        value: 10000
+      - key: ANET_EXPLORER_AUTH_REQUIRED
+        value: true
+      - key: ANET_ALLOW_INELIGIBLE_WALLET_TEST
+        value: false
+      - key: ANET_TEST_FAUCET_ENABLED
+        value: false
+      - key: ANET_GENESIS_PATH
+        value: /var/data/anet/config/genesis.json
+      - key: ANET_CHAIN_PATH
+        value: /var/data/anet/data/chain.json
+      - key: DATABASE_URL
+        sync: false
+      - key: ANET_SEED_NODES
+        sync: false
+      - key: ANET_PUBLIC_RPC_ENDPOINTS
+        sync: false

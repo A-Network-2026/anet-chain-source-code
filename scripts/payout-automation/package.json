@@ -1,0 +1,16 @@
+{
+  "name": "anet-payout-worker",
+  "version": "1.0.0",
+  "description": "ANET payout automation worker for Render",
+  "main": "worker.js",
+  "scripts": {
+    "start": "node worker.js",
+    "test": "node worker.js"
+  },
+  "keywords": ["payout", "automation", "anet"],
+  "author": "ANET",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

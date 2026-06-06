@@ -1,0 +1,16 @@
+{
+  "base_url": "https://anet-private-mainnet.onrender.com",
+  "payout_executor_url": "",
+  "payout_executor_api_key": "",
+  "dry_run": true,
+  "min_sessions": 1000,
+  "max_payout_usdc_per_user_per_day": 5,
+  "max_total_payout_usdc_per_hour": 25,
+  "reserve_ratio_min": 1.2,
+  "current_reserve_usdc": 100,
+  "current_pending_liabilities_usdc": 0,
+  "max_retries": 3,
+  "chain_activity_enabled": true,
+  "chain_activity_url": "",
+  "chain_activity_source": "inapp"
+}

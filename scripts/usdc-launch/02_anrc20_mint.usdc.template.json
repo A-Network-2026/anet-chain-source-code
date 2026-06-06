@@ -1,0 +1,19 @@
+{
+  "auth": {
+    "wallet": "<TREASURY_WALLET_ANET_ADDRESS>",
+    "nonce": <NONCE_2>,
+    "timestamp": "<RFC3339_UTC_TIMESTAMP>",
+    "chain_id": "<CHAIN_ID_FROM_HEALTH>",
+    "payload": {
+      "route": "anrc20_mint",
+      "symbol": "USDC",
+      "to": "<TREASURY_WALLET_ANET_ADDRESS>",
+      "amount": <USDC_UNITS_TO_MINT>
+    },
+    "signature": "<HEX_65_BYTE_RECOVERABLE_SIGNATURE>",
+    "action_hash": "<SHA256_CANONICAL_ACTION_HASH_HEX>"
+  },
+  "to": "<TREASURY_WALLET_ANET_ADDRESS>",
+  "symbol": "USDC",
+  "amount": <USDC_UNITS_TO_MINT>
+}

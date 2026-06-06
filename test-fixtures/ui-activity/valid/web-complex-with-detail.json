@@ -1,0 +1,13 @@
+{
+  "source": "web",
+  "action": "liquidity_pool_deposit",
+  "wallet": "0x3C44CdDdB6a900c9c2f0032d652a3f1e3d6d5b5E",
+  "screen": "liquidity_pools",
+  "status": "success",
+  "detail": {
+    "pool_id": "ANET_USDC",
+    "amount_in": "1000000000",
+    "min_amount_out": "990000000",
+    "slippage": "0.01"
+  }
+}

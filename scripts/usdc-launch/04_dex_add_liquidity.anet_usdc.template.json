@@ -1,0 +1,20 @@
+{
+  "provider": "<TREASURY_WALLET_ANET_ADDRESS>",
+  "auth": {
+    "wallet": "<TREASURY_WALLET_ANET_ADDRESS>",
+    "nonce": <NONCE_4>,
+    "timestamp": "<RFC3339_UTC_TIMESTAMP>",
+    "chain_id": "<CHAIN_ID_FROM_HEALTH>",
+    "payload": {
+      "route": "dex_add_liquidity",
+      "token_symbol": "USDC",
+      "anet_amount_ants": <ADD_ANET_ANTS>,
+      "token_amount_units": <ADD_USDC_UNITS>
+    },
+    "signature": "<HEX_65_BYTE_RECOVERABLE_SIGNATURE>",
+    "action_hash": "<SHA256_CANONICAL_ACTION_HASH_HEX>"
+  },
+  "token_symbol": "USDC",
+  "anet_amount_ants": <ADD_ANET_ANTS>,
+  "token_amount_units": <ADD_USDC_UNITS>
+}

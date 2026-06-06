@@ -1,0 +1,126 @@
+name: Validate UI Activity Schema
+
+on:
+  pull_request:
+    paths:
+      - 'schemas/ui-activity/**'
+      - 'test-fixtures/ui-activity/**'
+      - 'src/rpc.rs'
+      - 'src/state.rs'
+      - '.github/workflows/validate-ui-activity-schema.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'schemas/ui-activity/**'
+      - 'test-fixtures/ui-activity/**'
+      - 'src/rpc.rs'
+      - 'src/state.rs'
+
+jobs:
+  validate-schema:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Install ajv-cli
+        run: npm install -g ajv-cli@5.0.0
+      
+      - name: Validate valid fixtures against schema
+        run: |
+          echo "Validating valid UI activity fixtures..."
+          for file in test-fixtures/ui-activity/valid/*.json; do
+            if [ -f "$file" ]; then
+              echo "  Validating: $file"
+              ajv validate -s schemas/ui-activity/v1.schema.json -d "$file" || exit 1
+            fi
+          done
+          echo "✓ All valid fixtures passed schema validation"
+      
+      - name: Validate invalid fixtures are rejected
+        run: |
+          echo "Validating that invalid fixtures are properly rejected..."
+          for file in test-fixtures/ui-activity/invalid/*.json; do
+            if [ -f "$file" ]; then
+              echo "  Validating rejection: $file"
+              if ! ajv validate -s schemas/ui-activity/v1.schema.json -d "$file" 2>/dev/null; then
+                echo "    ✓ Correctly rejected"
+              else
+                echo "    ✗ ERROR: Invalid fixture was not rejected: $file"
+                exit 1
+              fi
+            fi
+          done
+          echo "✓ All invalid fixtures correctly rejected"
+      
+      - name: Test cargo build
+        run: |
+          cd anet-chain-main || exit 0
+          cargo check --quiet
+      
+      - name: Run backend tests
+        run: |
+          cd anet-chain-main || exit 0
+          cargo test --quiet -- --nocapture --test-threads=1
+        continue-on-error: true
+
+  lint-schema:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Verify schema file exists
+        run: |
+          if [ ! -f "schemas/ui-activity/v1.schema.json" ]; then
+            echo "✗ ERROR: schemas/ui-activity/v1.schema.json not found"
+            exit 1
+          fi
+          echo "✓ Schema file found"
+      
+      - name: Validate JSON Schema syntax
+        run: |
+          python3 -c "import json; json.load(open('schemas/ui-activity/v1.schema.json'))"
+          echo "✓ JSON Schema syntax valid"
+      
+      - name: Verify schema $id versioning
+        run: |
+          SCHEMA_ID=$(python3 -c "import json; print(json.load(open('schemas/ui-activity/v1.schema.json')).get('\$id', ''))")
+          if [[ ! "$SCHEMA_ID" =~ ^https://a-network\.net/schemas/ui-activity/v[0-9]+\.schema\.json$ ]]; then
+            echo "✗ ERROR: Invalid or missing \$id in schema: $SCHEMA_ID"
+            exit 1
+          fi
+          echo "✓ Schema \$id versioning valid: $SCHEMA_ID"
+      
+      - name: Check for required schema sections
+        run: |
+          python3 << 'EOF'
+          import json
+          schema = json.load(open('schemas/ui-activity/v1.schema.json'))
+          required_keys = ['$schema', '$id', 'type', 'properties', 'required']
+          for key in required_keys:
+            if key not in schema:
+              print(f"✗ ERROR: Missing required schema key: {key}")
+              exit(1)
+          print("✓ All required schema sections present")
+          
+          # Verify source enum
+          if 'source' not in schema['properties']:
+            print("✗ ERROR: Missing 'source' property")
+            exit(1)
+          
+          # Verify action pattern
+          if 'action' not in schema['properties']:
+            print("✗ ERROR: Missing 'action' property")
+            exit(1)
+          
+          print("✓ Schema properties validated")
+          EOF

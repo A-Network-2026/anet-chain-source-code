@@ -1,0 +1,42 @@
+services:
+  - type: background_worker
+    name: anet-payout-worker
+    runtime: node
+    rootDir: scripts/payout-automation
+    plan: starter
+    buildCommand: npm install
+    startCommand: node worker.js
+    preDeployCommand: echo "Worker deployment verified"
+    envVars:
+      - key: CONFIG_PATH
+        value: ./config.json
+      - key: QUEUE_PATH
+        value: ./queue.json
+      - key: STATE_PATH
+        value: ./state.json
+      - key: BASE_URL
+        value: https://anet-private-mainnet.onrender.com
+      - key: PAYOUT_EXECUTOR_URL
+        value: https://anet-payout-executor.onrender.com/execute
+      - key: PAYOUT_EXECUTOR_API_KEY
+        sync: false
+      - key: SCHEDULE_INTERVAL_MINUTES
+        value: 5
+
+cronJobs:
+  - name: anet-payout-worker-schedule
+    schedule: "*/5 * * * *"
+    command: "node scripts/payout-automation/worker.js"
+    envVars:
+      - key: CONFIG_PATH
+        value: ./scripts/payout-automation/config.json
+      - key: QUEUE_PATH
+        value: ./scripts/payout-automation/queue.json
+      - key: STATE_PATH
+        value: ./scripts/payout-automation/state.json
+      - key: BASE_URL
+        value: https://anet-private-mainnet.onrender.com
+      - key: PAYOUT_EXECUTOR_URL
+        value: https://anet-payout-executor.onrender.com/execute
+      - key: PAYOUT_EXECUTOR_API_KEY
+        sync: false

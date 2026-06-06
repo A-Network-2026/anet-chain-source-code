@@ -1,0 +1,11 @@
+{
+  "source": "inapp",
+  "action": "token_swap_initiated",
+  "wallet": "0x742d35Cc6634C0532925a3b844Bc9e7595f82e44",
+  "screen": "dex_swap",
+  "status": "success",
+  "SignedActionAuthorization": {
+    "payload": "{\"source\":\"inapp\",\"action\":\"token_swap_initiated\",\"wallet\":\"0x742d35Cc6634C0532925a3b844Bc9e7595f82e44\",\"timestamp\":1715377200}",
+    "signature": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1c"
+  }
+}

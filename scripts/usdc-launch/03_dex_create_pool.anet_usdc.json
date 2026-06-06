@@ -1,0 +1,22 @@
+﻿{
+    "provider":  "ANET1234567890ABCDEF1234567890ABCDEF1234",
+    "auth":  {
+                 "wallet":  "ANET1234567890ABCDEF1234567890ABCDEF1234",
+                 "nonce":  3,
+                 "timestamp":  "2026-05-10T22:08:46Z",
+                 "chain_id":  "anet-private-mainnet-1",
+                 "payload":  {
+                                 "route":  "dex_create_pool",
+                                 "token_symbol":  "USDC",
+                                 "anet_amount_ants":  5000000000,
+                                 "token_amount_units":  50000000,
+                                 "fee_bps":  30
+                             },
+                 "signature":  "\u003cFILL_SIGNATURE_HEX_65_BYTES\u003e",
+                 "action_hash":  "\u003cFILL_ACTION_HASH_HEX\u003e"
+             },
+    "token_symbol":  "USDC",
+    "anet_amount_ants":  5000000000,
+    "token_amount_units":  50000000,
+    "fee_bps":  30
+}

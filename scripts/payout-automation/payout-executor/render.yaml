@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: anet-payout-executor
+    runtime: node
+    rootDir: scripts/payout-automation/payout-executor
+    plan: starter
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: EXECUTOR_API_KEY
+        sync: false
+      - key: BSC_RPC_URL
+        value: https://bsc-dataseed.binance.org
+      - key: USDC_TOKEN_ADDRESS
+        value: 0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d
+      - key: TREASURY_PRIVATE_KEY
+        sync: false
+      - key: TREASURY_MNEMONIC
+        sync: false
+      - key: TREASURY_DERIVATION_PATH
+        value: m/44'/60'/0'/0/0
+      - key: USDC_DECIMALS
+        value: 6
+      - key: ALLOW_DRY_RUN
+        value: true

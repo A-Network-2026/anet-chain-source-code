@@ -1,0 +1,19 @@
+﻿{
+    "auth":  {
+                 "wallet":  "ANET1234567890ABCDEF1234567890ABCDEF1234",
+                 "nonce":  2,
+                 "timestamp":  "2026-05-10T22:08:46Z",
+                 "chain_id":  "anet-private-mainnet-1",
+                 "payload":  {
+                                 "route":  "anrc20_mint",
+                                 "symbol":  "USDC",
+                                 "to":  "ANET1234567890ABCDEF1234567890ABCDEF1234",
+                                 "amount":  100000000
+                             },
+                 "signature":  "\u003cFILL_SIGNATURE_HEX_65_BYTES\u003e",
+                 "action_hash":  "\u003cFILL_ACTION_HASH_HEX\u003e"
+             },
+    "to":  "ANET1234567890ABCDEF1234567890ABCDEF1234",
+    "symbol":  "USDC",
+    "amount":  100000000
+}

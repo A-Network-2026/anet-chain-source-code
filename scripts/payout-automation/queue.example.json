@@ -1,0 +1,14 @@
+{
+  "items": [
+    {
+      "request_id": "payout_req_0001",
+      "user_wallet": "ANET1234567890ABCDEF1234567890ABCDEF1234",
+      "destination_bsc_address": "0x1111111111111111111111111111111111111111",
+      "usdc_amount": 1.25,
+      "swap_reference": "swap_block_42_wallet_ANET123...",
+      "status": "pending",
+      "retries": 0,
+      "created_at": "2026-05-10T22:30:00Z"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+target/
+data/
+.env
+.env.*
+.git/
+.github/
+Dockerfile
+README.md
+render.yaml

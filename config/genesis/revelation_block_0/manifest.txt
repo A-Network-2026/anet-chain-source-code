@@ -1,0 +1,30 @@
+====================================================================
+  A-NETWORK — REVELATION BLOCK 0
+====================================================================
+  Message       : REVELATION BLOCK 0 — WEF Agenda 2030 sealed into Proof-of-Work time. No authority. No reversal. No governance. Truth revealed by computation.
+  Timestamp     : 2026-05-26T19:14:23.000Z
+  SHA-256 root  : f8719ae352bdc77b40390580ef2149f271f823635da2a928c766e639fd13d27a
+  Signature     : genesis.sig (ed25519)
+  Chain anchors:
+    Bitcoin head : #951158  
+    BSC head     : #100593590
+  Aggregate state:
+    Source rows           : 89980
+    Unique wallets        : 81763
+    Walletless accounts   : 8217
+    Eligible accounts     : 0  (>= 1000 sessions)
+    Unverified accounts   : 6670
+    Total sessions        : 2446072
+    Total ledger balance  : 31,990.68690775 ANET (3199068690775 ANTS)
+    Theoretical balance   : 119,437.09714464 ANET (11943709714464 ANTS)
+    Ledger / theory drift : -8744641023689 ANTS
+    Hard cap headroom     : 20,968,009.31309225 ANET (2096800931309225 ANTS)
+  Output files:
+    /Users/joeldupalco/Downloads/rmp-site/backend/genesis/genesis.json
+    /Users/joeldupalco/Downloads/rmp-site/backend/genesis/genesis.sha256
+    /Users/joeldupalco/Downloads/rmp-site/backend/genesis/genesis.sig
+    /Users/joeldupalco/Downloads/rmp-site/backend/genesis/genesis.pubkey
+  Publish the SHA-256 root publicly (X / Telegram / GitHub release).
+  Once posted, the genesis state is timestamp-committed and cannot be
+  silently altered. No authority. No reversal. Truth by computation.
+====================================================================

@@ -1,0 +1,8 @@
+/.env
+/target/
+/data/
+/config/*.json
+
+# Keep directories creatable at runtime
+!/config/.gitkeep
+!/data/.gitkeep.DS_Store
